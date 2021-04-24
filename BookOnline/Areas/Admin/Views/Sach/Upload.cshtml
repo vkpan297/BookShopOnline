@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@model Models.Sach
+<h2>Upload</h2>
+<h3>@Model.TenSach</h3>
+
+@using (Html.BeginForm("Upload", "Sach", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.TextBox("file", "", new { type = "file" })<br />
+
+        @Html.HiddenFor(Model => Model.IDSach, "value")
+        <input type="submit" value="upload" />
+    </div>
+}
+

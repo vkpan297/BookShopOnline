@@ -1,0 +1,49 @@
+﻿@model List<Models.ChiTietHoaDon>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông Tin Chi Tiết-Hoá Đơn</h2>
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Mã Sách</th>
+            <th>Tên Sách</th>
+            <th>Mã Hoá Đơn</th>
+            <td>Tên Khách Hàng</td>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th>Email</th>
+            <th>Số Lượng Mua</th>
+            <th>Giá</th>
+            
+
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.MaSach</td>
+            <td>@item.Sach.TenSach</td>
+            <td>@item.MaHoaDon</td>
+            <td>@item.HoaDon.TenNguoiNhan</td>
+            <td>@item.HoaDon.SdtNguoiNhan</td>
+            <td>@item.HoaDon.DiaChiNguoiNhan</td>
+            <td>@item.HoaDon.EmailNguoiNhan</td>
+            <td>@item.SoLuongMua</td>
+            <td>@item.Gia.000 VND</td>
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<h2>Tổng:@Model.Sum(i=>i.Gia).000VND</h2>
+

@@ -1,0 +1,36 @@
+﻿
+@model PagedList.IPagedList<Models.TinTuc>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="/Assets/tintuc/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<div class="wrap">
+    <div class="main">
+        <div class="content">
+@foreach (var item in Model)
+{
+
+
+            <div class="image group">
+                <div class="grid images_3_of_1">
+                    <img src="~/AnhTinTuc/anhtintuc/@item.hinhanh" alt="" />
+                </div>
+                <div class="grid news_desc">
+                    <h2><a href="/TinTucClient/Detail/@item.matt">@item.tieude</a></h2>
+                    <h4>@Html.Raw(item.noidung.Substring(0,200))...</h4>
+                </div>
+            </div>
+
+}
+
+        </div>
+    </div>
+</div>
+
+
+

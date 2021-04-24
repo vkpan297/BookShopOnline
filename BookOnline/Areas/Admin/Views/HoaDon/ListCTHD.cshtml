@@ -1,0 +1,71 @@
+﻿
+@model PagedList.IPagedList<Models.ChiTietHoaDon>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Doanh thu</h1>
+    <p class="mb-4"></p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã Sách</th>
+                            <th>Tên Sách</th>
+                            <th>Mã Hoá Đơn</th>
+                            <td>Tên Khách Hàng</td>
+                            <th>Số Điện Thoại</th>
+                            <th>Địa Chỉ</th>
+                            <th>Email</th>
+                            <th>Số Lượng Mua</th>
+                            <th>Giá</th>
+
+
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaSach</td>
+                                <td>@item.Sach.TenSach</td>
+                                <td>@item.MaHoaDon</td>
+                                <td>@item.HoaDon.TenNguoiNhan</td>
+                                <td>@item.HoaDon.SdtNguoiNhan</td>
+                                <td>@item.HoaDon.DiaChiNguoiNhan</td>
+                                <td>@item.HoaDon.EmailNguoiNhan</td>
+                                <td>@item.SoLuongMua</td>
+                                <td>@item.Gia.000 VND</td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+
+                @Html.PagedListPager(Model, page => Url.Action("ListCTHD", new { page }))
+
+                <h2>Tổng:@Model.Sum(i => i.Gia).000VND</h2>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+﻿@model Models.TinTuc
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var relateProducts = (List<Models.TinTuc>)ViewBag.ListRelateProducts;
+}
+
+<h2></h2>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-6">
+          
+                    <br />
+
+                   <div>@Model.tieude</div> 
+<br /><br />                    
+                        <div>@Html.Raw(Model.noidung)</div> 
+                   
+
+
+                
+            </div>
+
+            <div class="col-md-6">
+                <h2>Tin Tức</h2>
+                @foreach (var item in relateProducts)
+                {
+                    <div class="col-md-4 agileinfo_single_left" >
+                        <a href="/TinTucClient/Detail/@item.matt"> <img src="~/AnhTinTuc/anhtintuc/@item.hinhanh" width="100px" height="100px" /></a>
+                        <p>@item.tieude</p>
+</div>
+                   
+                }
+                
+            </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+

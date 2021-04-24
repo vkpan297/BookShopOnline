@@ -1,0 +1,66 @@
+﻿@model List<BookOnline.Models.Cartitem>
+@{
+    
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="/Assets/client/js/controller/cartController.js"></script>
+@section slide{
+@if (Model.Count > 0)
+{
+    <table class="table"  >
+        <thead>
+            <tr style="color:black;">
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Mã sản phẩm</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Tên sản phẩm</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Ảnh sản phẩm</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Số Lượng</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Đơn Giá</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center">Thành Tiền</th>
+                <th style="border: 2px outset #cb6c8c;color:black;text-align:center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@item.Sach.IDSach</td>
+                <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@item.Sach.TenSach</td>
+                <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle"><img src="~/images/image/@item.Sach.Anh" width="100px" height="100px" /></td>
+                @if (item.SoLuong < 0)
+                {
+
+                    <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle"><input type="text" class="txtQuantity" data-id="@item.Sach.IDSach" value="1" size="10px" /></td>
+                    <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@item.Sach.Gia.GetValueOrDefault(0).000 VND</td>
+                    <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@(item.Sach.Gia.GetValueOrDefault(0) * 1).000 VND</td>
+                }
+                else
+                {
+                   
+                        <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle"><input type="text" class="txtQuantity" data-id="@item.Sach.IDSach" value="@item.SoLuong" size="10px" /></td>
+                        <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@item.Sach.Gia.GetValueOrDefault(0).000 VND</td>
+                        <td style="border: 2px outset #cb6c8c;color:black;text-align:center;vertical-align:middle">@(item.Sach.Gia.GetValueOrDefault(0) * item.SoLuong).000 VND</td>
+                    
+                }
+
+
+                <td style="border: 2px outset #cb6c8c;text-align:center;vertical-align:middle"><a href="#" data-id="@item.Sach.IDSach" class="btn-Delete">Xoá</a></td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    <button id="btnContinue" class="btn" style="background-color:yellow;">Tiếp tục mua hàng</button>
+    <button id="btnUpdate" class="btn" style="background-color:yellowgreen;">Cập nhật giỏ hàng</button>
+    <button id="btnDeletAll" class="btn" style="background-color:cornflowerblue;">Xoá giỏ hàng</button>
+    <button id="btnPayment" class="btn" style="background-color:red;">Thanh toán</button>
+}
+else
+{
+    <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+}
+    }
+
+
+

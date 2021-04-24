@@ -1,0 +1,11 @@
+﻿@model List<BookOnline.Models.Cartitem>
+
+<div class="product_list_header">
+    <form action="#" method="post" class="last">
+        <fieldset>
+            <input type="hidden" name="cmd" value="_cart" />
+            <input type="hidden" name="display" value="1" />
+            <a href="/gio-hang"><input type="button" name="submit" value="Xem Giỏ Hàng" class="button" />@Model.Count Sản Phẩm</a>
+        </fieldset>
+    </form>
+</div>

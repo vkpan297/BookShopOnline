@@ -1,0 +1,107 @@
+﻿@model BookOnline.Models.RegisterModel
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+@{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha");}
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            padding-top: 0px;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .login-screen-bg {
+            background-color: #EFEFEF;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+</head>
+<body class="bg-gradient-primary">
+   
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 well well-sm col-md-offset-4">
+                    <legend>
+                        <a href="http://hocwebgiare.com/"><i class="glyphicon glyphicon-globe"></i></a> Đăng ký thành viên!
+                    </legend>
+                    @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        if (ViewBag.Success != null)
+                        {
+                            <div class="alert alert-success">@ViewBag.Success</div>
+                        }
+                        <form action="http://hocwebgiare.com"  class="form" role="form">
+
+                            @*<input class="form-control" name="firstname" placeholder="Họ" required="" autofocus="" type="text">*@
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Tên tài khoản..." })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Mật khẩu..." })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Xác nhận mật khẩu..." })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Tên khách hàng..." })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Address, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Địa chỉ..." })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Email..." })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control form-control-user", type = "text", id = "exampleInputEmail", placeholder = "Số điện thoại..." })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Captcha(registerCapcha)
+                                @Html.TextBox("CaptchaCode")
+                            </div>
+                            
+
+                            <br>
+                            <br>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit"> Đăng ký</button>
+                        </form>
+                    }
+                    </div>
+            </div>
+        </div>
+
+    
+
+</body>

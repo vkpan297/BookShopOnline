@@ -1,0 +1,84 @@
+﻿
+@model PagedList.IPagedList<Models.Sach>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Sản Phẩm</h1>
+    <p class="mb-4"></p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+        @using (Html.BeginForm("Index", "Sach", FormMethod.Get))
+        {
+            
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text"  class="form-control bg-light border-0 small"  placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"  value="@ViewBag.SearchString" name="searchString">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        }
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã Sản Phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Giá</th>
+                            <th>Tên Loại</th>
+                            <th>Số Tập</th>
+                            <th>Ảnh</th>
+                            <th>Ngày Nhập</th>
+                            <th>Tác Giả</th>
+                            <th>Mô Tả</th>
+                        </tr>
+                    </thead>
+           
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IDSach</td>
+                                <td>@item.TenSach</td>
+                                <td>@item.SoLuong</td>
+                                <td>@item.Gia</td>
+                                <td>@item.LoaiSach.TenLoai</td>
+                                <td>@item.SoTap</td>
+                                <td><img src="~/images/image/@item.Anh" width="100px" height="100px"/></td>
+                                <td>@(item.NgayNhap.HasValue?item.NgayNhap.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@item.TacGia</td>
+                                <td>@Html.Raw(item.Mota)</td>
+                                <td>
+                                    <a href="/Admin/Sach/Edit/@item.IDSach">Sửa</a>
+
+                                    <a href="/Admin/Sach/Delete/@item.IDSach">Xoá</a>
+                                    <a href="/Admin/Sach/Upload/@item.IDSach">Upload</a>
+
+</tr>
+                        }                                           
+                    </tbody>
+                    
+                </table>
+             
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page,@searchString=@ViewBag.SearchString }))
+                @Html.ActionLink("Thêm", "Create", "Sach")
+            </div>
+        </div>
+    </div>
+</div>
+

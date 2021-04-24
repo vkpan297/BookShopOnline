@@ -1,0 +1,73 @@
+﻿
+@model PagedList.IPagedList<Models.HoaDon>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Hoá đơn</h1>
+    <p class="mb-4"></p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+       
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã Hoá Đơn</th>
+                            <th>Mã Khách Hàng</th>
+                            <th>Ngày Nhập</th>
+                            <th>Tên Người Nhận</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Địa Chỉ Giao Hàng</th>
+                            <th>Email</th>
+                            <th>Trạng thái</th>
+                            
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaHoaDon</td>
+                                <td>@item.MaKh</td>
+                                <td>@(item.NgayNhap.HasValue ? item.NgayNhap.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@item.TenNguoiNhan</td>
+                                <td>@item.SdtNguoiNhan</td>
+                                <td>@item.DiaChiNguoiNhan</td>
+                                <td>@item.EmailNguoiNhan</td>
+                                <td>@item.Status</td>
+                               
+                                <td>
+
+                                    
+                                    <a href="/Admin/HoaDon/Delete/@item.MaHoaDon">Xoá</a>
+                                    <a href="/Admin/HoaDon/Detail/@item.MaHoaDon">Xem</a>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                    
+                </table>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                <a href="/Admin/HoaDon/ListCTHD">Xem Doanh Thu</a>
+               
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿@model List<Models.Account>
+@{
+    ViewBag.Title = "DetailAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center">Thông Tin Cá Nhân</h2>
+<table class="table" align="center" style="text-align:center;width:500px;border:2px solid;">
+
+    @foreach (var item in Model)
+    {
+    <tbody>
+        <tr>
+            <td style="color:black">Tài Khoản:</td>
+            <td style="color:black">@item.UserName</td>
+        </tr>
+        <tr>
+            <td style="color:black">Mật Khẩu:</td>
+            <td style="color:black">@item.Password</td>
+        </tr>
+        <tr>
+            <td style="color:black">Tên Khách Hàng:</td>
+            <td style="color:black">@item.Name</td>
+        </tr>
+        <tr>
+            <td style="color:black">Địa Chỉ:</td>
+            <td style="color:black">@item.Address</td>
+        </tr>
+        <tr>
+            <td style="color:black">Email:</td>
+            <td style="color:black">@item.Email</td>
+        </tr>
+        <tr>
+            <td style="color:black">Số Điện Thoại:</td>
+            <td style="color:black">@item.Phone</td>
+        </tr>
+    </tbody>
+        
+ 
+
+    }
+
+
+</table>
+
